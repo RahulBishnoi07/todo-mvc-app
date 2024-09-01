@@ -2,16 +2,28 @@
 
 import { useState } from "react";
 
+interface Todo {
+  text: string;
+  completed: boolean;
+}
+
 export default function Home() {
-  const [todos, setTodos] = useState<string[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   const handleAddTodo = (input: string) => {
-    setTodos([...todos, input]);
+    setTodos([...todos, { text: input, completed: false }]);
   };
 
   const handleDeleteTodo = (index: number) => {
-    const updatedTodos = todos.filter((_, i) => i !== index);
-    setTodos(updatedTodos);
+    setTodos(todos.filter((_, i) => i !== index));
+  };
+
+  const toggleCompleted = (index: number) => {
+    setTodos(
+      todos.map((todo, i) =>
+        i === index ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -36,8 +48,15 @@ export default function Home() {
       />
       <ul className="mt-4">
         {todos.map((todo, index) => (
-          <li key={index} className="text-white flex items-center">
-            {todo}
+          <li
+            key={index}
+            className={`flex items-center text-white ${
+              todo.completed ? "line-through text-gray-500" : ""
+            }`}
+          >
+            <span className="bg-red-500" onClick={() => toggleCompleted(index)}>
+              {todo.text}
+            </span>
             <button
               className="ml-2 text-red-500"
               onClick={() => handleDeleteTodo(index)}
