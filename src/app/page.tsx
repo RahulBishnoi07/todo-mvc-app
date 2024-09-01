@@ -9,12 +9,18 @@ export default function Home() {
     setTodos([...todos, input]);
   };
 
+  const handleDeleteTodo = (index: number) => {
+    const updatedTodos = todos.filter((_, i) => i !== index);
+    setTodos(updatedTodos);
+  };
+
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      handleAddTodo(
-        (document.getElementById("todoInput") as HTMLInputElement).value.trim()
-      );
-      (document.getElementById("todoInput") as HTMLInputElement).value = "";
+      const inputElement = document.getElementById(
+        "todoInput"
+      ) as HTMLInputElement;
+      handleAddTodo(inputElement.value.trim());
+      inputElement.value = "";
     }
   };
 
@@ -30,8 +36,14 @@ export default function Home() {
       />
       <ul className="mt-4">
         {todos.map((todo, index) => (
-          <li key={index} className="text-green">
+          <li key={index} className="text-white flex items-center">
             {todo}
+            <button
+              className="ml-2 text-red-500"
+              onClick={() => handleDeleteTodo(index)}
+            >
+              ✖
+            </button>
           </li>
         ))}
       </ul>
