@@ -49,13 +49,15 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center h-screen p-10 bg-white">
-      <div className="text-rose-700 text-8xl">todos</div>
-      <div className="box">
+      <div className="text-rose-700 text-8xl font-extralight text-7xl">
+        todos
+      </div>
+      <div className="flex flex-col border border-rose-700">
         <input
           id="todoInput"
           type="text"
           placeholder="What needs to be done?"
-          className="border border-rose-700 p-2 rounded mt-4 text-black"
+          className="p-2 mt-4 text-black"
           onKeyPress={handleKeyPress}
         />
         <ul className="mt-4 w-full max-w-md">
@@ -82,13 +84,15 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <div className="flex space-x-4 mt-4 text-black">
-          <span>{filteredTodos.length} items left</span>
-          <button onClick={() => setFilter("All")}>All</button>
-          <button onClick={() => setFilter("Active")}>Active</button>
-          <button onClick={() => setFilter("Completed")}>Completed</button>
-          <button onClick={() => clearCompleted()}>Clear Completed</button>
-        </div>
+        {todos.length > 0 && (
+          <div className="flex space-x-4 mt-4 text-black">
+            <span>{filteredTodos.length} items left</span>
+            <button onClick={() => setFilter("All")}>All</button>
+            <button onClick={() => setFilter("Active")}>Active</button>
+            <button onClick={() => setFilter("Completed")}>Completed</button>
+            <button onClick={() => clearCompleted()}>Clear Completed</button>
+          </div>
+        )}
       </div>
     </main>
   );
