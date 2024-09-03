@@ -52,19 +52,19 @@ export default function Home() {
       <div className="text-rose-700 text-8xl font-extralight text-7xl">
         todos
       </div>
-      <div className="flex flex-col border border-rose-700">
+      <div className="flex flex-col border-rose-700 p-2 border-4">
         <input
           id="todoInput"
           type="text"
           placeholder="What needs to be done?"
-          className="p-2 mt-4 text-black"
+          className="p-2 mt-4 text-black border-4 border-rose-700"
           onKeyPress={handleKeyPress}
         />
-        <ul className="mt-4 w-full max-w-md">
+        <ul className="mt-4 border-r-4 border-l-4 border-t-4 border-rose-700">
           {filteredTodos.map((todo, index) => (
             <li
               key={index}
-              className="flex items-center justify-between p-2 border-b border-rose-700"
+              className="flex items-center justify-between p-2 border-b-4 border-rose-700"
             >
               <div className="flex items-center">
                 <input
@@ -86,11 +86,33 @@ export default function Home() {
         </ul>
         {todos.length > 0 && (
           <div className="flex space-x-4 mt-4 text-black">
-            <span>{filteredTodos.length} items left</span>
-            <button onClick={() => setFilter("All")}>All</button>
-            <button onClick={() => setFilter("Active")}>Active</button>
-            <button onClick={() => setFilter("Completed")}>Completed</button>
-            <button onClick={() => clearCompleted()}>Clear Completed</button>
+            <span className="border-4 border-rose-700 p-2">
+              {filteredTodos.length} items left
+            </span>
+            <button
+              className="border-4 border-rose-700 p-2"
+              onClick={() => setFilter("All")}
+            >
+              All
+            </button>
+            <button
+              className="border-4 border-rose-700 p-2"
+              onClick={() => setFilter("Active")}
+            >
+              Active
+            </button>
+            <button
+              className="border-4 border-rose-700 p-2"
+              onClick={() => setFilter("Completed")}
+            >
+              Completed
+            </button>
+            <button
+              className="border-4 border-rose-700 p-2 "
+              onClick={() => clearCompleted()}
+            >
+              Clear Completed
+            </button>
           </div>
         )}
       </div>
